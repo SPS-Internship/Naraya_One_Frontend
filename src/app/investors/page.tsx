@@ -5,6 +5,8 @@ import {
   FinancialHighlights,
   InvestmentOpportunity,
   InvestorContact,
+  DocumentsAndReports,
+  CorporateGovernance,
 } from '@/components/investor';
 
 export const metadata: Metadata = {
@@ -18,8 +20,11 @@ export default function InvestorsPage() {
       <InvestorHero />
       <InvestorOverview />
       <FinancialHighlights />
+      <DocumentsAndReports />
+      <CorporateGovernance />
       <InvestmentOpportunity />
       <InvestorContact />
     </main>
   );
 }
+
