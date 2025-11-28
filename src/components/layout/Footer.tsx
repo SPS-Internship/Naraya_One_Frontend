@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { motion } from 'framer-motion'
+import Image from "next/image";
 
 const navigation = {
   main: [
@@ -55,6 +56,7 @@ export default function Footer() {
     <footer className="bg-secondary text-secondary-foreground">
       <div className="mx-auto max-w-[1400px] px-4 py-16 lg:px-6">
         <div className="xl:grid xl:grid-cols-3 xl:gap-8">
+          
           {/* Brand Section */}
           <div className="space-y-8">
             <motion.div
@@ -63,12 +65,29 @@ export default function Footer() {
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
             >
-              <Link href="/" className="text-2xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-                Naraya.One
-              </Link>
+              <Link href="/" className="-m-1.5 p-1.5">
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                className="flex items-center"// untuk membuat image dan text sejajar
+              >
+                <Image
+                  src="/file_2025-09-29_06.26.12-removebg-preview.png"
+                  alt="Naraya Logo"
+                  width={60}     // sesuaikan ukuran yang kamu mau
+                  height={60}
+                  className="object-contain"
+                />
+
+                <span className="text-2xl font-bold bg-linear-to-r from-primary to-accent bg-clip-text text-transparent">
+                  Naraya.One
+                </span>
+              </motion.div>
+            </Link>
+
               <p className="mt-4 text-sm text-muted-foreground max-w-md">
-                A dynamic holding company operating across telecommunications, technology, and services sectors. 
-                Building integrated business ecosystems that drive innovation and growth.
+                Perusahaan induk dinamis yang beroperasi di berbagai sektor telekomunikasi, teknologi, dan jasa.
+                Membangun ekosistem bisnis terintegrasi yang mendorong inovasi dan pertumbuhan.
               </p>
             </motion.div>
             
