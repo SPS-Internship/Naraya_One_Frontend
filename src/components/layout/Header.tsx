@@ -5,6 +5,8 @@ import Link from 'next/link'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import { Button } from '../ui/button'
+import Image from "next/image";
+
 
 const navigation = [
   { name: 'Beranda', href: '/' },
@@ -14,7 +16,6 @@ const navigation = [
   { name: 'Berita & Wawasan', href: '/news' },
   { name: 'CSR & Keberlanjutan', href: '/sustainability' },
   { name: 'Karir', href: '/careers' },
-  { name: 'Kontak', href: '/contact' },
   { name: 'Investor', href: '/investors' },
 ]
 
@@ -26,23 +27,33 @@ export default function Header() {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
-      className="fixed top-0 left-0 right-0 bg-background/95 backdrop-blur-md shadow-lg z-50"
+      className="fixed top-0 left-0 right-0 bg-white/20 dark:bg-black/30 backdrop-blur-md shadow-lg z-50"
     >
       <nav className="mx-auto max-w-[1400px] px-4 lg:px-6" aria-label="Global">
         <div className="flex h-20 items-center justify-between">
           {/* Logo */}
           <div className="flex lg:flex-1">
             <Link href="/" className="-m-1.5 p-1.5">
-              <span className="sr-only">Naraya.One</span>
               <motion.div
                 whileHover={{ scale: 1.05 }}
                 transition={{ type: "spring", stiffness: 400, damping: 17 }}
-                className="text-2xl font-bold bg-linear-to-r from-primary to-accent bg-clip-text text-transparent"
+                className="flex items-center"// untuk membuat image dan text sejajar
               >
-                Naraya.One
+                <Image
+                  src="/file_2025-09-29_06.26.12-removebg-preview.png"
+                  alt="Naraya Logo"
+                  width={60}     // sesuaikan ukuran yang kamu mau
+                  height={60}
+                  className="object-contain"
+                />
+
+                <span className="text-2xl font-bold bg-linear-to-r from-primary to-accent bg-clip-text text-transparent">
+                  Naraya.One
+                </span>
               </motion.div>
             </Link>
           </div>
+
 
           {/* Mobile menu button */}
           <div className="flex lg:hidden">
@@ -56,39 +67,41 @@ export default function Header() {
             </button>
           </div>
 
-          {/* Desktop navigation */}
-          <div className="hidden lg:flex lg:gap-x-8">
-            {navigation.map((item, index) => (
-              <motion.div
-                key={item.name}
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
-              >
-                <Link
-                  href={item.href}
-                  className="text-sm font-semibold leading-6 text-foreground hover:text-primary transition-colors duration-300"
-                >
-                  {item.name}
-                </Link>
-              </motion.div>
-            ))}
-          </div>
-
-          {/* CTA Button */}
-          <div className="hidden lg:flex lg:flex-1 lg:justify-end">
+        {/* Desktop navigation */}
+        <div className="hidden lg:flex lg:gap-x-5"> 
+          {navigation.map((item, index) => (
             <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.5 }}
+              key={item.name}
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.1 }}
             >
-              <Button className="bg-primary hover:bg-primary/90 text-primary-foreground">
-                Hubungi Kami
-              </Button>
+              <Link
+                href={item.href}
+                className="text-sm font-semibold leading-6 text-foreground hover:text-primary transition-colors duration-300"
+              >
+                {item.name}
+              </Link>
             </motion.div>
-          </div>
+          ))}
         </div>
-      </nav>
+
+        {/* CTA Button */}
+        <div className="hidden lg:flex lg:justify-end ml-4">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.5 }}
+          >
+            <Button asChild className="bg-primary hover:bg-primary/90 text-primary-foreground">
+              <Link href="/contact">
+                Hubungi Kami
+              </Link>
+            </Button>
+          </motion.div>
+        </div>
+          </div>
+        </nav>
 
       {/* Mobile menu */}
       <AnimatePresence>
@@ -146,10 +159,12 @@ export default function Header() {
                   </div>
                   <div className="py-6">
                     <Button 
+                      asChild
                       className="w-full bg-primary hover:bg-primary/90 text-primary-foreground"
-                      onClick={() => setMobileMenuOpen(false)}
                     >
-                      Hubungi Kami
+                      <Link href="/contact" onClick={() => setMobileMenuOpen(false)}>
+                        Hubungi Kami
+                      </Link>
                     </Button>
                   </div>
                 </div>
